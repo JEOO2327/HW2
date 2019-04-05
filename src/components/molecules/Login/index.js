@@ -39,8 +39,10 @@ export const Login = ({ state, postRequest, loginRequest, logoutRequest }) => {
     )
   }
   else {
+    username = localStorage.getItem("username")
     return (
       <div>
+        <h1><b> Username : {username} </b></h1>
         <button type="submit" onClick={() => logoutRequest()}> 로그아웃 </button>
       </div>
     )

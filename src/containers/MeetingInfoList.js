@@ -18,8 +18,8 @@ const mapDispatchToProps = (dispatch) => {
 
 
 
-      deleteRequest : () => {
-        dispatch(deleteRequest())
+      deleteRequest : (id) => {
+        dispatch(deleteRequest(id))
       },
   }
 }

@@ -30,6 +30,7 @@ const meetinglist_reducer = (state = initialState, action) => {
       localStorage.removeItem("username")
       localStorage.removeItem("password")
       return {
+        meetingList : null,
         username : null,
         token : null,
       };
@@ -54,11 +55,11 @@ const meetinglist_reducer = (state = initialState, action) => {
 //      console.log("PO_SUC action.meetingList : " + action.meetingInfoList)
 //      console.log("PO_SUC action.meetingList_parse : " + JSON.parse(action.meetingInfoList))
 
-      localStorage.setItem("meetinglist",JSON.stringify(JSON.parse(state.meetingList).concat(action.meetingInfoList))); //string 안에 배열이 들어잇는형태로 저장
+      localStorage.setItem("meetingList",JSON.stringify(JSON.parse(state.meetingList).concat(action.meetingInfoList))); //string 안에 배열이 들어잇는형태로 저장
   //    console.log("after POST_SUCCESS local.meetingList : " + localStorage.getItem("meetingList"))
       return {
        ...state,
-        meetingList : JSON.stringify(JSON.parse(state.meetingList).concat(action.meetingInfoList)),
+        meetingList : localStorage.getItem("meetingList"),
       }
 
     case 'POST_FAIL' :
@@ -70,23 +71,23 @@ const meetinglist_reducer = (state = initialState, action) => {
 
     //delete reducer
     case 'DELETE_SUCCESS' :
-      return deleteMeeting(state);
+        const newList = JSON.parse(localStorage.getItem("meetingList"));
+    //    console.log("newlist : " + newList)
+  //      console.log("action id : " + action.id)
+        localStorage.setItem("meetingList", JSON.stringify(newList.filter(meeting => meeting.id !== action.id)))
+
+        console.log("reducer delete_succ - list : " +  JSON.stringify(newList.filter(meeting =>
+           meeting.id !== action.id
+         )))
+
+      return {
+        ...state,
+        meetingList : localStorage.getItem("meetingList")
+      };
 
     default :
         return state
   }
-
-//function for delete
-  function deleteMeeting(state){
-    return {
-//      const meetings = state.meetingList;
-//      this.setState({
-//        meetingList : meetings.filter()
-//      })
-    }
-  }
-
-
   //function for login
 }
 

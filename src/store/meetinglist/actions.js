@@ -28,11 +28,13 @@ export const postRequest = (sinceWhen, tilWhen) => ({
   tilWhen,
 })
 
-export const deleteSuccess = () => ({
-  type : DELETE_SUCCESS
+export const deleteSuccess = (id) => ({
+  type : DELETE_SUCCESS,
+  id
 })
-export const deleteRequest = () => ({
-  type : DELETE_REQUEST
+export const deleteRequest = (id) => ({
+  type : DELETE_REQUEST,
+  id
 })
 
 export const loginSuccess = (username, password, meetingList) => ({

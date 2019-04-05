@@ -11,24 +11,32 @@ const Wrapper = styled.div`
 const style = {
       border : '1px solid black',
       padding : '8px',
-      margin : '8px'
+      margin : '8px',
+      background : '#e3fafc'
+
     };
 
 
-export const MeetingInfo = ({ state, deleteRequest }) => {
 
+export const MeetingInfo = ({ state, sinceWhen, tilWhen, id, deleteRequest, created, user }) => {
 
+  
   return (
-    <div>
+    <div style = {style}>
       <div>sinceWhen : {sinceWhen}</div>
       <div>tilWhen : {tilWhen}</div>
       <div>id : {id}</div>
-      <button onClick = {deleteRequest}>삭제</button>
+      <div>created : {created}</div>
+      <div>username : {user}</div>
+      <button onClick = {() =>deleteRequest(id)}>삭제</button>
     </div>
   )
 }
 
 MeetingInfo.propTypes = {
+  sinceWhen : PropTypes.string.isRequired,
+  tilWhen : PropTypes.string.isRequired,
+  id : PropTypes.number.isRequired,
   reverse: PropTypes.bool,
   children: PropTypes.node,
 }
